@@ -1,31 +1,42 @@
-import Image from 'next/image'
-import hamburguer from '../../assets/hamburguer.png'
-import fries from '../../assets/fries.png'
-import soda from '../../assets/refri.png'
-import beers from '../../assets/beers.png'
-import portions from '../../assets/portion.png'
+import { Heart } from 'lucide-react'
 const FoodList = () => {
   return (
-    <div className="flex gap-8 justify-center items-center w-full flex-wrap">
-      <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary">
-        <Image src={hamburguer} alt="hamburger" className="w-[90px] h-[90px]" />
-        <h3>Hamburguers</h3>
-      </div>
-      <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary ">
-        <Image src={fries} alt="hamburger" className="w-[90px] h-[90px" />
-        <h3>Batata frita</h3>
-      </div>
-      <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary">
-        <Image src={soda} alt="hamburger" className="w-[90px] h-[90px" />
-        <h3>Refrigerantes</h3>
-      </div>
-      <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary">
-        <Image src={beers} alt="hamburger" className="w-[90px] h-[90px" />
-        <h3>Cervejas</h3>
-      </div>
-      <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary">
-        <Image src={portions} alt="hamburger" className="w-[90px] h-[90px" />
-        <h3>Porções</h3>
+    <div className="mt-6 flex justify-center">
+      <div className=" w-[90%] p-3">
+        <h1 className="text-lg font-bold bg-blue-400 p-2">BURGUER</h1>
+        <div className=" flex items-center">
+          <div className="p-3">
+            <h4 className="font-semibold">Hamburgao</h4>
+            <span className="font-semibold">R$ 3,50</span>
+            <p className="text-xs">
+              Esse hamburgeu é muito muito muito gostoso e tbm é bem barto e
+              entrega no confrto da sua casa
+            </p>
+          </div>
+          <Heart />
+        </div>
+        <div className=" flex items-center">
+          <div className="p-3">
+            <h4 className="font-semibold">Hamburgao</h4>
+            <span className="font-semibold">R$ 3,50</span>
+            <p className="text-xs">
+              Esse hamburgeu é muito muito muito gostoso e tbm é bem barto e
+              entrega no confrto da sua casa
+            </p>
+          </div>
+          <Heart />
+        </div>
+        <div className=" flex items-center">
+          <div className="p-3">
+            <h4 className="font-semibold">Hamburgao</h4>
+            <span className="font-semibold">R$ 3,50</span>
+            <p className="text-xs">
+              Esse hamburgeu é muito muito muito gostoso e tbm é bem barto e
+              entrega no confrto da sua casa
+            </p>
+          </div>
+          <Heart />
+        </div>
       </div>
     </div>
   )
