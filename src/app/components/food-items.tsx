@@ -28,26 +28,46 @@ const FoodItems = () => {
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary cursor-pointer">
         <Image
           src={fries}
-          alt="hamburger"
+          alt="fries"
           className="w-[90px] h-[90px"
           onClick={() => handleUpdateFood(FoodsType.FRIES)}
         />
         <h3>Batatas</h3>
       </div>
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary cursor-pointer">
-        <Image src={soda} alt="hamburger" className="w-[90px] h-[90px" />
+        <Image
+          src={soda}
+          alt="soda"
+          className="w-[90px] h-[90px"
+          onClick={() => handleUpdateFood(FoodsType.SODA)}
+        />
         <h3>Refrigerantes</h3>
       </div>
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary cursor-pointer">
-        <Image src={beers} alt="hamburger" className="w-[90px] h-[90px" />
+        <Image
+          src={beers}
+          alt="beers"
+          className="w-[90px] h-[90px"
+          onClick={() => handleUpdateFood(FoodsType.BEERS)}
+        />
         <h3>Cervejas</h3>
       </div>
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary cursor-pointer">
-        <Image src={portions} alt="hamburger" className="w-[90px] h-[90px" />
+        <Image
+          src={portions}
+          alt="portions"
+          className="w-[90px] h-[90px"
+          onClick={() => handleUpdateFood(FoodsType.PORTIONS)}
+        />
         <h3>Porções</h3>
       </div>
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary cursor-pointer">
-        <Image src={combo} alt="hamburger" className="w-[90px] h-[90px" />
+        <Image
+          src={combo}
+          alt="combos"
+          className="w-[90px] h-[90px"
+          onClick={() => handleUpdateFood(FoodsType.COMBOS)}
+        />
         <h3>Combos</h3>
       </div>
     </div>
