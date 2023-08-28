@@ -6,7 +6,7 @@ import beers from '../../assets/beers.png'
 import portions from '../../assets/portion.png'
 const FoodList = () => {
   return (
-    <div className="flex gap-11 justify-center items-center w=full">
+    <div className="flex gap-8 justify-center items-center w-full flex-wrap">
       <div className="flex flex-col items-center px-8 py-5 h-[160px] justify-center hover:outline outline-1 rounded-md outline-primary">
         <Image src={hamburguer} alt="hamburger" className="w-[90px] h-[90px]" />
         <h3>Hamburguers</h3>

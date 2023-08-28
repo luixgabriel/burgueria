@@ -7,7 +7,7 @@ const lilita = Lilita_One({ subsets: ['latin'], weight: '400' })
 
 const Header = () => {
   return (
-    <header className={`${lilita.className} flex justify-between px-14 py-5`}>
+    <header className={`${lilita.className} flex justify-between px-5 py-5`}>
       <div className="flex items-center gap-3">
         <Image src={logo} alt="burgueria" className="w-[70px] h-[70px]" />
         <h1 className="text-primary font-bold text-lg">BURGUERIA</h1>
