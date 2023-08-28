@@ -1,11 +1,6 @@
-interface IBurguer {
-  id: number
-  name: string
-  price: string
-  description: string
-}
+import { IFood } from '@/types/foods'
 
-const burguerList: IBurguer[] = [
+const burguerList: IFood[] = [
   {
     id: 1,
     name: 'Clássico',
