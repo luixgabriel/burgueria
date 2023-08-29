@@ -9,7 +9,8 @@ export default function Product({
 }: {
   searchParams: { id: string }
 }) {
-  const { finalPriceOrder, setFinalPriceOrder } = useOrderContext()
+  const { finalPriceOrder, setFinalPriceOrder, handleUpdateFinalPrice } =
+    useOrderContext()
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
   useEffect(() => {
     setFinalPriceOrder(product?.price)
@@ -39,7 +40,13 @@ export default function Product({
                     <div className="flex items-center gap-2">
                       <AiOutlineLine color="#004083" />
                       <span>{add.quantity}</span>
-                      <AiOutlinePlus color="#004083" />
+                      <AiOutlinePlus
+                        className="cursor-pointer"
+                        color="#004083"
+                        onClick={() =>
+                          handleUpdateFinalPrice(product.id, add.id)
+                        }
+                      />
                     </div>
                   </div>
                 ))}
