@@ -1,4 +1,5 @@
 import products from '@/data/products'
+import { IAdditional } from '@/types/products'
 import { AiOutlinePlus, AiOutlineLine } from 'react-icons/ai'
 
 export default function Product({
@@ -25,7 +26,7 @@ export default function Product({
               <>
                 {' '}
                 <h1 className="font-semibold self-center">Complemento</h1>
-                {product.additional.map((add) => (
+                {product.additional.map((add: IAdditional) => (
                   <div key={add.id} className="flex justify-between m-3">
                     <div>
                       <p>{`ADICIONAL (${add.name})`}</p>
