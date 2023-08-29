@@ -57,7 +57,7 @@ export default function Product({
                 <span>1</span>
                 <AiOutlinePlus />
               </div>
-              <button className="bg-red-400">Adicionar</button>
+              <button className="bg-red-500">Adicionar</button>
             </div>
           </div>
         </div>
