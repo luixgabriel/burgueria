@@ -10,7 +10,7 @@ const SelectedItem = ({ product }: any) => {
             <span>{product.price}</span>
           </div>
           <div className="flex">
-            <h1>Complementos</h1>
+            <h1>Complemento</h1>
           </div>
         </div>
       )}
