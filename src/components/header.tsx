@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import logo from '../assets/logo.png'
-import { Heart, ShoppingBag } from 'lucide-react'
+import { AiFillShopping, AiFillHeart } from 'react-icons/ai'
 import { Lilita_One } from 'next/font/google'
 
 const lilita = Lilita_One({ subsets: ['latin'], weight: '400' })
@@ -14,10 +14,10 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-3 ">
         <span>
-          <Heart color="#004083" />
+          <AiFillHeart color="#004083" size={25} />
         </span>
         <span>
-          <ShoppingBag color="#004083" />
+          <AiFillShopping color="#004083" size={25} />
         </span>
       </div>
     </header>

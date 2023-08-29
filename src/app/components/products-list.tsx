@@ -1,6 +1,9 @@
 import { IProducts } from '@/types/foods'
-import { Heart } from 'lucide-react'
+import { useState } from 'react'
 import { AiFillHeart } from 'react-icons/ai'
+import products from '@/data/products'
+import SelectedItem from './selected-item'
+import { useSelectedProductContext } from '@/hooks/useSelectFIlter'
 
 interface ProductsListProps {
   product: string
@@ -8,12 +11,14 @@ interface ProductsListProps {
 }
 
 const ProductsList = ({ product, arr }: ProductsListProps) => {
-  const teste = (id: number) => {
-    console.log(id)
+  const { setSelectedProduct, selectedProduct } = useSelectedProductContext()
+  const searchItem = (id: number) => {
+    const item = products.find((prdt) => prdt.id === id)
+    setSelectedProduct(item)
   }
-
   return (
     <div className="mt-6 flex justify-center">
+      {selectedProduct && <SelectedItem product={selectedProduct} />}
       <div className=" w-[95%] p-3">
         <h1 className="text-lg font-bold bg-primary text-white p-2 rounded-sm">
           {product}
@@ -23,7 +28,7 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
             <div
               className="flex items-center justify-between transition-all cursor-pointer border-b-2 hover:bg-secondary"
               key={product.id}
-              onClick={() => teste(product.id)}
+              onClick={() => searchItem(product.id)}
             >
               <div className="p-3 w-[80%]">
                 <h4 className="font-semibold">{product.name}</h4>
@@ -31,17 +36,8 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
                 <p className="text-xs">{product.description}</p>
               </div>
               <div className="px-5">
-                {/* <Heart
-                  size={20}
-                  style={{
-                    cursor: 'pointer',
-                    transition: 'color 0.1s',
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'red')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'black')}
-                />{' '} */}
                 <AiFillHeart
-                  size={20}
+                  size={25}
                   style={{
                     cursor: 'pointer',
                     transition: 'color 0.1s',
