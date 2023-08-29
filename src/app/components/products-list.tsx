@@ -1,9 +1,6 @@
 import { IProducts } from '@/types/products'
 import { useRouter } from 'next/navigation'
 import { AiFillHeart } from 'react-icons/ai'
-import products from '@/data/products'
-import SelectedItem from './selected-item'
-import { useSelectedProductContext } from '@/hooks/useSelectFIlter'
 
 interface ProductsListProps {
   product: string
@@ -14,8 +11,6 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
   const router = useRouter()
   const handleNavigate = (id: number) => {
     router.push(`/product?id=${id}`)
-    // const item = products.find((prdt) => prdt.id === id)
-    // setSelectedProduct(item)
   }
   return (
     <div className="mt-6 flex justify-center">
