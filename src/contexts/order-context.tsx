@@ -2,7 +2,7 @@ import { ReactNode, createContext, useState } from 'react'
 
 interface IOrderContext {
   finalPriceOrder: number | string
-  setFinalPriceOrder: (value: number) => void
+  setFinalPriceOrder: (value: any) => void
   quantity: number
   setQuantity: (value: number) => void
 }
