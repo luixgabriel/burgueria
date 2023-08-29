@@ -1,5 +1,3 @@
-import { FoodsType } from '@/types/food-enums'
-import products from '@/data/products'
 import { ReactNode, createContext, useState } from 'react'
 
 interface ISelectedProductContext {

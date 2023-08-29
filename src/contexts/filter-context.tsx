@@ -1,5 +1,5 @@
 import { FoodsType } from '@/types/food-enums'
-import { IProducts } from '@/types/foods'
+import { IProducts } from '@/types/products'
 import products from '@/data/products'
 import { ReactNode, createContext, useState } from 'react'
 

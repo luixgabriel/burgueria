@@ -1,5 +1,5 @@
 import { FoodsType } from '@/types/food-enums'
-import { IProducts } from '@/types/foods'
+import { IProducts } from '@/types/products'
 
 const products: IProducts[] = [
   {
@@ -8,6 +8,44 @@ const products: IProducts[] = [
     price: '10,00',
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de carne, alface, tomate e molho especial.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 2,
@@ -16,6 +54,44 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer de carne, bacon crocante, queijo cheddar, alface e molho barbecue.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 3,
@@ -24,6 +100,44 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer vegetariano, alface, tomate, cebola roxa e molho tártaro.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 4,
@@ -31,6 +145,44 @@ const products: IProducts[] = [
     price: '13,00',
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de frango empanado, alface, maionese e picles.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 5,
@@ -39,6 +191,44 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer de picanha, queijo muçarela, bacon, cebolas caramelizadas e molho de mostarda e mel.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 6,
@@ -46,6 +236,44 @@ const products: IProducts[] = [
     price: '14,00',
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de peixe, alface, tomate e molho tártaro.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 7,
@@ -54,6 +282,44 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Três hambúrgueres de carne, queijo cheddar, bacon, alface, tomate e molho especial.',
+    additional: [
+      {
+        id: 1,
+        name: 'Cheedar Cremoso',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 2,
+        name: 'Blend Bovino 100G',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 3,
+        name: 'Fatia Bacon',
+        price: '4,00',
+        quantity: 0,
+      },
+      {
+        id: 4,
+        name: 'Fatia de Cheddar',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 5,
+        name: 'Fatia de Queijo',
+        price: '3,00',
+        quantity: 0,
+      },
+      {
+        id: 6,
+        name: 'Ovo',
+        price: '2,00',
+        quantity: 0,
+      },
+    ],
   },
   {
     id: 8,
