@@ -15,7 +15,7 @@ const BurguerList = () => {
           </h1>
           {burguerList.map((burger) => (
             <div
-              className=" flex items-center justify-between border-b-2"
+              className="flex items-center justify-between transition-all border-b-2 hover:bg-secondary"
               key={burger.id}
             >
               <div className="p-3 w-[80%]">
@@ -23,7 +23,9 @@ const BurguerList = () => {
                 <span className="font-semibold">{`R$ ${burger.price}`}</span>
                 <p className="text-xs">{burger.description}</p>
               </div>
-              <Heart size={20} />
+              <div className="px-5">
+                <Heart size={20} />{' '}
+              </div>
             </div>
           ))}
         </div>

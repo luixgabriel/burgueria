@@ -9,7 +9,7 @@ const CombosList = () => {
         </h1>
         {combosList.map((combos) => (
           <div
-            className=" flex items-center justify-between border-b-2"
+            className="flex items-center justify-between transition-all border-b-2 hover:bg-secondary"
             key={combos.id}
           >
             <div className="p-3 w-[80%]">
@@ -17,7 +17,9 @@ const CombosList = () => {
               <span className="font-semibold">{`R$ ${combos.price}`}</span>
               <p className="text-xs">{combos.description}</p>
             </div>
-            <Heart size={20} />
+            <div className="px-5">
+              <Heart size={20} />{' '}
+            </div>
           </div>
         ))}
       </div>

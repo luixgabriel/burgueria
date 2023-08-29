@@ -9,7 +9,7 @@ const SodaList = () => {
         </h1>
         {sodaList.map((soda) => (
           <div
-            className=" flex items-center justify-between border-b-2"
+            className="flex items-center justify-between transition-all border-b-2 hover:bg-secondary"
             key={soda.id}
           >
             <div className="p-3 w-[80%]">
@@ -17,7 +17,9 @@ const SodaList = () => {
               <span className="font-semibold">{`R$ ${soda.price}`}</span>
               <p className="text-xs">{soda.description}</p>
             </div>
-            <Heart size={20} />
+            <div className="px-5">
+              <Heart size={20} />{' '}
+            </div>
           </div>
         ))}
       </div>

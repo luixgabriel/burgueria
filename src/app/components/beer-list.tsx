@@ -9,7 +9,7 @@ const BeerList = () => {
         </h1>
         {beersList.map((beer) => (
           <div
-            className=" flex items-center justify-between border-b-2"
+            className="flex items-center justify-between transition-all border-b-2 hover:bg-secondary"
             key={beer.id}
           >
             <div className="p-3 w-[80%]">
@@ -17,7 +17,9 @@ const BeerList = () => {
               <span className="font-semibold">{`R$ ${beer.price}`}</span>
               <p className="text-xs">{beer.description}</p>
             </div>
-            <Heart size={20} />
+            <div className="px-5">
+              <Heart size={20} />{' '}
+            </div>
           </div>
         ))}
       </div>

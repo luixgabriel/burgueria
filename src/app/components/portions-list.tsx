@@ -9,7 +9,7 @@ const PortionsList = () => {
         </h1>
         {portionsList.map((portion) => (
           <div
-            className=" flex items-center justify-between border-b-2"
+            className="flex items-center justify-between transition-all border-b-2 hover:bg-secondary"
             key={portion.id}
           >
             <div className="p-3 w-[80%]">
@@ -17,7 +17,9 @@ const PortionsList = () => {
               <span className="font-semibold">{`R$ ${portion.price}`}</span>
               <p className="text-xs">{portion.description}</p>
             </div>
-            <Heart size={20} />
+            <div className="px-5">
+              <Heart size={20} />{' '}
+            </div>
           </div>
         ))}
       </div>
