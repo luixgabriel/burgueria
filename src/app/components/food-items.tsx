@@ -21,7 +21,7 @@ const FoodItems = () => {
           src={hamburguer}
           alt="hamburger"
           className="w-[90px] h-[90px]"
-          onClick={() => handleUpdateFood(FoodsType.HAMBURGER)}
+          onClick={() => handleUpdateFood(FoodsType.hamburguer)}
         />
         <h3>Hamburguers</h3>
       </div>
@@ -30,7 +30,7 @@ const FoodItems = () => {
           src={fries}
           alt="fries"
           className="w-[90px] h-[90px"
-          onClick={() => handleUpdateFood(FoodsType.FRIES)}
+          onClick={() => handleUpdateFood(FoodsType.fries)}
         />
         <h3>Batatas</h3>
       </div>
@@ -39,7 +39,7 @@ const FoodItems = () => {
           src={soda}
           alt="soda"
           className="w-[90px] h-[90px"
-          onClick={() => handleUpdateFood(FoodsType.SODA)}
+          onClick={() => handleUpdateFood(FoodsType.soda)}
         />
         <h3>Refrigerantes</h3>
       </div>
@@ -48,7 +48,7 @@ const FoodItems = () => {
           src={beers}
           alt="beers"
           className="w-[90px] h-[90px"
-          onClick={() => handleUpdateFood(FoodsType.BEERS)}
+          onClick={() => handleUpdateFood(FoodsType.beers)}
         />
         <h3>Cervejas</h3>
       </div>
@@ -57,7 +57,7 @@ const FoodItems = () => {
           src={portions}
           alt="portions"
           className="w-[90px] h-[90px"
-          onClick={() => handleUpdateFood(FoodsType.PORTIONS)}
+          onClick={() => handleUpdateFood(FoodsType.portions)}
         />
         <h3>Porções</h3>
       </div>
@@ -66,7 +66,7 @@ const FoodItems = () => {
           src={combo}
           alt="combos"
           className="w-[90px] h-[90px"
-          onClick={() => handleUpdateFood(FoodsType.COMBOS)}
+          onClick={() => handleUpdateFood(FoodsType.combos)}
         />
         <h3>Combos</h3>
       </div>

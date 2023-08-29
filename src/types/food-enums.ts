@@ -1,8 +1,8 @@
 export enum FoodsType {
-  'HAMBURGER',
-  'FRIES',
-  'SODA',
-  'BEERS',
-  'PORTIONS',
-  'COMBOS',
+  'hamburguer' = 'BURGUER',
+  'fries' = 'BATATAS',
+  'soda' = 'REFRIGERANTES',
+  'beers' = 'CERVEJAS',
+  'portions' = 'PORÇÕES',
+  'combos' = 'COMBOS',
 }
