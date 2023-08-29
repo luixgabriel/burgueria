@@ -29,7 +29,7 @@ export default function Product({
           <div className="flex flex-col w[90%]">
             {product.additional && (
               <>
-                <h1 className="font-semibold self-center">Complemento</h1>
+                <h1 className="font-semibold self-center">Complementos</h1>
                 {product.additional.map((add) => (
                   <div key={add.id} className="flex justify-between m-3">
                     <div>
