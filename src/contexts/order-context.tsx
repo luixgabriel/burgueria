@@ -1,14 +1,17 @@
 import { ReactNode, createContext, useState } from 'react'
 import products from '@/data/products'
-import { IAdditional, IProducts } from '@/types/products'
+import { json } from 'stream/consumers'
 
 interface IOrderContext {
-  finalPriceOrder: any
-  setFinalPriceOrder: (value: any) => void
-  handleUpdateFinalPrice: (id: number, additionalId: number) => void
-  //   getAdditionalQuantity: (name: string) => number
-  quantity: number
-  setQuantity: (value: number) => void
+  totalPrice: number
+  setTotalPrice: (value: number) => void
+  handleUpdateFinalPrice: (
+    additionId: number,
+    additionPrice: number,
+    additionName: string,
+  ) => void
+  additionalsInfo: any
+  setAdditionalsInfo: (value: any) => void
 }
 
 interface OrderContextProps {
@@ -18,38 +21,39 @@ interface OrderContextProps {
 export const OrderContext = createContext({} as IOrderContext)
 
 export function OrderProvider({ children }: OrderContextProps) {
-  const [finalPriceOrder, setFinalPriceOrder] = useState<number>(0)
-  const [quantity, setQuantity] = useState<number>(0)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [additionalsInfo, setAdditionalsInfo] = useState<any>({})
 
-  //   function increaseCartQuantity(id: number) {
-  //     setCartItems((prev) => {
-  //       // SE ISSO ME RETORNAR NULL EU ADICIONO NO CART
-  //       if (prev.find((item) => item.id === id) == null) {
-  //         return [...prev, { id, quantity: 1 }]
-  //       } else {
-  //         return prev.map((item) => {
-  //           if (item.id === id) {
-  //             return { ...item, quantity: item.quantity + 1 }
-  //           } else {
-  //             return item
-  //           }
-  //         })
-  //       }
-  //     })
-  //   }
+  const handleUpdateFinalPrice = (
+    additionId: number,
+    additionPrice: number,
+    additionName: string,
+  ) => {
+    const currentAdditional = additionalsInfo[additionId] || {}
 
-  const handleUpdateFinalPrice = () => {
-    console.log('oi')
+    const updatedQuantity = (currentAdditional.quantity || 0) + 1
+
+    const updatedAdditionalsInfo = {
+      ...additionalsInfo,
+      [additionId]: {
+        name: additionName,
+        price: additionPrice,
+        quantity: updatedQuantity,
+      },
+    }
+    setAdditionalsInfo(updatedAdditionalsInfo)
   }
+
+  localStorage.setItem('additionalsInfo', JSON.stringify(additionalsInfo))
 
   return (
     <OrderContext.Provider
       value={{
-        finalPriceOrder,
-        setFinalPriceOrder,
-        quantity,
-        setQuantity,
+        totalPrice,
+        setTotalPrice,
         handleUpdateFinalPrice,
+        additionalsInfo,
+        setAdditionalsInfo,
       }}
     >
       {children}
