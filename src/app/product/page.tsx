@@ -19,6 +19,7 @@ export default function Product({
 
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
   const [additionalsInfo, setAdditionalsInfo] = useState<any>({})
+  const [totalPrice, setTotalPrice] = useState(product?.price || 0)
 
   const handleUpdateFinalPrice2 = (
     additionId: number,
@@ -31,17 +32,24 @@ export default function Product({
     const updatedAdditionalsInfo = {
       ...additionalsInfo,
       [additionId]: {
-        price: additionPrice, // Define o preço aqui, já que ele não deve mudar
+        price: additionPrice,
         quantity: updatedQuantity,
       },
     }
     setAdditionalsInfo(updatedAdditionalsInfo)
   }
 
-  console.log(additionalsInfo)
+  const calculateTotalAdditionals = () => {
+    return Object.values(additionalsInfo).reduce(
+      (sum: any, additional: any) =>
+        sum + additional.price * additional.quantity,
+      0,
+    )
+  }
   useEffect(() => {
-    setFinalPriceOrder(product?.price)
-  }, [product, setFinalPriceOrder])
+    const totalAdditionals: any = calculateTotalAdditionals()
+    setTotalPrice(product?.price + totalAdditionals)
+  }, [additionalsInfo])
 
   return (
     <div className="flex justify-center items-center z-50 ">
@@ -92,7 +100,7 @@ export default function Product({
                 <AiOutlinePlus color="#004083" />
               </div>
               <div className="bg-primary text-white px-7 py-2 rounded-md flex gap-3">
-                <span>R$ {formattedPrice(finalPriceOrder)}</span>
+                <span>{formattedPrice(totalPrice)}</span>
                 <button>Adicionar</button>
               </div>
             </div>
