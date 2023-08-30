@@ -1,7 +1,8 @@
 'use client'
 import products from '@/data/products'
 import { useOrderContext } from '@/hooks/useOrder'
-import { useEffect } from 'react'
+import formattedPrice from '@/utils/formatPrice'
+import { useEffect, useState } from 'react'
 import { AiOutlinePlus, AiOutlineLine } from 'react-icons/ai'
 
 export default function Product({
@@ -9,12 +10,39 @@ export default function Product({
 }: {
   searchParams: { id: string }
 }) {
-  const { finalPriceOrder, setFinalPriceOrder, handleUpdateFinalPrice } =
-    useOrderContext()
+  const {
+    finalPriceOrder,
+    setFinalPriceOrder,
+
+    // getAdditionalQuantity,
+  } = useOrderContext()
+
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
+  const [additionalsInfo, setAdditionalsInfo] = useState<any>({})
+
+  const handleUpdateFinalPrice2 = (
+    additionId: number,
+    additionPrice: number,
+  ) => {
+    const currentAdditional = additionalsInfo[additionId] || {}
+
+    const updatedQuantity = (currentAdditional.quantity || 0) + 1
+
+    const updatedAdditionalsInfo = {
+      ...additionalsInfo,
+      [additionId]: {
+        price: additionPrice, // Define o preço aqui, já que ele não deve mudar
+        quantity: updatedQuantity,
+      },
+    }
+    setAdditionalsInfo(updatedAdditionalsInfo)
+  }
+
+  console.log(additionalsInfo)
   useEffect(() => {
     setFinalPriceOrder(product?.price)
   }, [product, setFinalPriceOrder])
+
   return (
     <div className="flex justify-center items-center z-50 ">
       {product && (
@@ -25,7 +53,7 @@ export default function Product({
           <div className="flex flex-col gap-2">
             <h4>{product.name}</h4>
             <p>{product.description}</p>
-            <span>R$ {product.price}</span>
+            <span>{formattedPrice(product.price)}</span>
           </div>
           <div className="flex flex-col w[90%]">
             {product.additional && (
@@ -35,16 +63,16 @@ export default function Product({
                   <div key={add.id} className="flex justify-between m-3">
                     <div>
                       <p>{`ADICIONAL (${add.name})`}</p>
-                      <span>+ R$ {add.price}</span>{' '}
+                      <span>+ {formattedPrice(add.price)}</span>{' '}
                     </div>
                     <div className="flex items-center gap-2">
                       <AiOutlineLine color="#004083" />
-                      <span>{add.quantity}</span>
+                      <span>{additionalsInfo[add.id]?.quantity || 0}</span>
                       <AiOutlinePlus
                         className="cursor-pointer"
                         color="#004083"
                         onClick={() =>
-                          handleUpdateFinalPrice(product.id, add.id)
+                          handleUpdateFinalPrice2(add.id, add.price)
                         }
                       />
                     </div>
@@ -64,7 +92,7 @@ export default function Product({
                 <AiOutlinePlus color="#004083" />
               </div>
               <div className="bg-primary text-white px-7 py-2 rounded-md flex gap-3">
-                <span>R$ {finalPriceOrder}</span>
+                <span>R$ {formattedPrice(finalPriceOrder)}</span>
                 <button>Adicionar</button>
               </div>
             </div>

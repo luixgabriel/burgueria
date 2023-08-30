@@ -1,11 +1,12 @@
 import { ReactNode, createContext, useState } from 'react'
 import products from '@/data/products'
-import { IAdditional } from '@/types/products'
+import { IAdditional, IProducts } from '@/types/products'
 
 interface IOrderContext {
-  finalPriceOrder: number | string
+  finalPriceOrder: any
   setFinalPriceOrder: (value: any) => void
   handleUpdateFinalPrice: (id: number, additionalId: number) => void
+  //   getAdditionalQuantity: (name: string) => number
   quantity: number
   setQuantity: (value: number) => void
 }
@@ -37,22 +38,8 @@ export function OrderProvider({ children }: OrderContextProps) {
   //     })
   //   }
 
-  const handleUpdateFinalPrice = (id: number, additionalId: number) => {
-    const item = products.find((prdt) => prdt.id === id)
-    let add = item?.additional?.find(
-      (add) => add.id === additionalId,
-    ) as IAdditional
-    if (localStorage.getItem(add.name)) {
-      let increaseQuantity = JSON.parse(localStorage.getItem(add.name) as any)
-      increaseQuantity = {
-        ...increaseQuantity,
-        quantity: increaseQuantity.quantity + 1,
-      }
-      localStorage.setItem(add.name, JSON.stringify(increaseQuantity))
-    } else {
-      add = { ...add, quantity: 1 }
-      localStorage.setItem(add.name, JSON.stringify(add))
-    }
+  const handleUpdateFinalPrice = () => {
+    console.log('oi')
   }
 
   return (

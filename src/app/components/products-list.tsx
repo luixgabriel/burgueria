@@ -1,4 +1,5 @@
 import { IProducts } from '@/types/products'
+import formattedPrice from '@/utils/formatPrice'
 import { useRouter } from 'next/navigation'
 import { AiFillHeart } from 'react-icons/ai'
 
@@ -27,7 +28,9 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
             >
               <div className="p-3 w-[80%]">
                 <h4 className="font-semibold">{product.name}</h4>
-                <span className="font-semibold">{`R$ ${product.price}`}</span>
+                <span className="font-semibold">
+                  {formattedPrice(product.price)}
+                </span>
                 <p className="text-xs">{product.description}</p>
               </div>
               <div className="px-5">
