@@ -44,8 +44,6 @@ export function OrderProvider({ children }: OrderContextProps) {
     setAdditionalsInfo(updatedAdditionalsInfo)
   }
 
-  localStorage.setItem('additionalsInfo', JSON.stringify(additionalsInfo))
-
   return (
     <OrderContext.Provider
       value={{
