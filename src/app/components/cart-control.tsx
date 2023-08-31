@@ -1,27 +1,15 @@
 'use client'
 import { AiFillShopping } from 'react-icons/ai'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-
-// const CartCount = styled.span`
-//   width: 17px;
-//   height: 17px;
-//   border-radius: 100%;
-//   padding: 0 5px;
-//   font-size: 10px;
-
-//   background-color: var(--delete-color);
-//   color: white;
-
-//   margin-left: -10px;
-// `
-// const Container = styled.div`
-//   position: relative;
-// `
-
+import { useRouter } from 'next/navigation'
 export function CartControl() {
   const { value } = useLocalStorage('products', [])
+  const router = useRouter()
   return (
-    <div className="relative">
+    <div
+      className="relative cursor-pointer"
+      onClick={() => router.push('/cart')}
+    >
       <AiFillShopping className="text-2xl" size={25} color="004083" />
       {value.length > 0 && (
         <span

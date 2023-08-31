@@ -1,6 +1,7 @@
-import { createContext, useContext, useState } from 'react'
+'use client'
+import { createContext, useState } from 'react'
 import { IProducts } from '@/types/products'
-import setCookie from '@/utils/cookies'
+import { useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface ShoppingCartContext {
@@ -19,6 +20,7 @@ interface ShoppingCartProviderProps {
 export const ShoppingCartContext = createContext({} as ShoppingCartContext)
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+  const router = useRouter()
   const [cartItems, setCartItems] = useState<IProducts[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const { value, updateLocalStorage } = useLocalStorage<IProducts[]>(
@@ -38,6 +40,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       value.push(product)
       updateLocalStorage(value)
     }
+
+    // router.push('/')
+    window.location.reload()
   }
 
   function removeFromCart(id: number) {

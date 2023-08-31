@@ -14,5 +14,6 @@ export interface IProducts {
   category: FoodsType
   favorite?: boolean
   description: string
+  observation?: string
   additional?: IAdditional[]
 }

@@ -124,6 +124,7 @@ export default function Product({
                     ...product,
                     additional: additionalsInfo,
                     price: totalPrice,
+                    observation,
                   })
                 }
                 className="bg-primary text-white px-7 py-2 rounded-md flex gap-3"
