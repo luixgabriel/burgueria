@@ -9,6 +9,7 @@ interface ShoppingCartContext {
   removeFromCart: (id: number) => void
   cartItems: IProducts[]
   setCartItems: (value: IProducts[]) => void
+  calculateTotal: (value: IProducts[]) => number
 }
 
 interface ShoppingCartProviderProps {
@@ -30,16 +31,34 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   function increaseCart(product: IProducts) {
     const newCartItems = [...value, product]
-    // if (newCartItems.length <= 1) window.location.reload()
     setCartItems(newCartItems)
     updateLocalStorage(newCartItems)
     router.push('/')
   }
 
-  function removeFromCart(id: number) {
-    setCartItems((prev) => {
-      return prev.filter((item) => item.id !== id)
-    })
+  function removeFromCart(productId: number) {
+    const productIndex = value.findIndex((product) => product.id === productId)
+    if (productIndex !== -1) {
+      const newCartItems = [...value]
+      newCartItems.splice(productIndex, 1)
+      setCartItems(newCartItems)
+      updateLocalStorage(newCartItems)
+    }
+  }
+
+  function calculateTotal(cartItems: IProducts[]): number {
+    return cartItems.reduce((acc, item) => {
+      let totalForItem: number = item.price
+
+      // Verifica se item.additional é um array e tem algum elemento
+      if (Array.isArray(item.additional) && item.additional.length > 0) {
+        totalForItem += item.additional.reduce((addAcc, add) => {
+          return addAcc + add.price * add.quantity
+        }, 0)
+      }
+
+      return acc + totalForItem
+    }, 0)
   }
 
   return (
@@ -49,6 +68,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         removeFromCart,
         cartItems,
         setCartItems,
+        calculateTotal,
       }}
     >
       {children}

@@ -1,20 +1,30 @@
 'use client'
 import { AiFillDelete } from 'react-icons/ai'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { IAdditional, IProducts } from '@/types/products'
+import { IProducts } from '@/types/products'
 import BackBtn from '../components/back-btn'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
+import Link from 'next/link'
 
 export default function Cart() {
-  const { cartItems } = useCart()
+  const { cartItems, removeFromCart, calculateTotal } = useCart()
   return (
     <section className="h-screen bg-gray-100 p-4">
       <div className="flex p-4 justify-between border-b-2 border-primary">
-        <h1 className="text-2xl font-bold">Pedido</h1>
+        <h1 className="text-2xl font-bold text-primary">Pedido</h1>
         <BackBtn path="/" />
       </div>
-
+      {cartItems.length <= 0 && (
+        <div className="flex flex-col items-center mt-6">
+          <h1 className="leading-5">
+            Acesse o nosso cardápio online e comece a adicionar itens ao seu
+            pedido!
+          </h1>
+          <Link href="/" className="font-bold text-primary m-2 hover:underline">
+            ACESSAR
+          </Link>
+        </div>
+      )}
       <div className="mt-6 space-y-4">
         {cartItems.map((item: IProducts) => (
           <div key={item.id} className="p-4 bg-white rounded shadow">
@@ -23,7 +33,11 @@ export default function Cart() {
                 <div className="flex items-center justify-between w-full mb-3">
                   <h1 className="text-xl font-semibold mb-2">{item.name}</h1>
                   <button>
-                    <AiFillDelete size={20} color="red" />
+                    <AiFillDelete
+                      size={20}
+                      color="red"
+                      onClick={() => removeFromCart(item.id)}
+                    />
                   </button>
                 </div>
 
@@ -59,7 +73,14 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      {/* <button>Finalizar Pedido</button> */}
+      <div className="flex  m-3 flex-col">
+        <span className="font-semibold p-2 text-lg self-end">
+          {cartItems.length <= 0
+            ? ''
+            : `Total: ${formattedPrice(calculateTotal(cartItems))}`}
+        </span>
+        <button>{cartItems.length <= 0 ? '' : 'Finalizar Pedido'}</button>
+      </div>
     </section>
   )
 }

@@ -1,6 +1,5 @@
 'use client'
 import { AiFillShopping } from 'react-icons/ai'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/hooks/useCart'
 export function CartControl() {
