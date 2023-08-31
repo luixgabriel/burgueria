@@ -1,7 +1,7 @@
 'use client'
+import { ShoppingCartProvider } from '@/contexts/cart-context'
 import { FilterFoodProvider } from '@/contexts/filter-context'
 import { OrderProvider } from '@/contexts/order-context'
-import { SelectedProductProvider } from '@/contexts/select-context'
 import { ReactNode } from 'react'
 
 interface DefaultProvidersProps {
@@ -12,7 +12,7 @@ export function DefaultProviders({ children }: DefaultProvidersProps) {
   return (
     <FilterFoodProvider>
       <OrderProvider>
-        <SelectedProductProvider>{children}</SelectedProductProvider>
+        <ShoppingCartProvider>{children}</ShoppingCartProvider>
       </OrderProvider>
     </FilterFoodProvider>
   )

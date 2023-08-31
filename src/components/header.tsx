@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import logo from '../assets/logo.png'
-import { AiFillShopping, AiFillHeart } from 'react-icons/ai'
+import { AiFillHeart } from 'react-icons/ai'
 import { Lilita_One } from 'next/font/google'
+import { CartControl } from '@/app/components/cart-control'
 
 const lilita = Lilita_One({ subsets: ['latin'], weight: '400' })
 
@@ -17,7 +18,7 @@ const Header = () => {
           <AiFillHeart color="#004083" size={25} />
         </span>
         <span>
-          <AiFillShopping color="#004083" size={25} />
+          <CartControl />
         </span>
       </div>
     </header>

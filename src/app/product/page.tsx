@@ -1,5 +1,6 @@
 'use client'
 import products from '@/data/products'
+import { useCart } from '@/hooks/useCart'
 import { useOrderContext } from '@/hooks/useOrder'
 import setCookie from '@/utils/cookies'
 import formattedPrice from '@/utils/formatPrice'
@@ -18,6 +19,8 @@ export default function Product({
     handleUpdateFinalPrice,
     handleDecreaseFinalPrice,
   } = useOrderContext()
+
+  const { increaseCart, cartQuantity } = useCart()
 
   const [selectedProduct, setSelectedProduct] = useState<number>(1)
   const [observation, setObservation] = useState<string>('')
@@ -115,7 +118,16 @@ export default function Product({
                   onClick={() => setSelectedProduct((prev) => prev + 1)}
                 />
               </div>
-              <div className="bg-primary text-white px-7 py-2 rounded-md flex gap-3">
+              <div
+                onClick={() =>
+                  increaseCart({
+                    ...product,
+                    additional: additionalsInfo,
+                    price: totalPrice,
+                  })
+                }
+                className="bg-primary text-white px-7 py-2 rounded-md flex gap-3"
+              >
                 <span>{formattedPrice(totalPrice)}</span>
                 <button>Adicionar</button>
               </div>
