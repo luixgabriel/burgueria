@@ -5,7 +5,8 @@ import { useOrderContext } from '@/hooks/useOrder'
 import setCookie from '@/utils/cookies'
 import formattedPrice from '@/utils/formatPrice'
 import { useEffect, useState } from 'react'
-import { AiOutlinePlus, AiOutlineLine } from 'react-icons/ai'
+import { useRouter } from 'next/navigation'
+import { AiOutlinePlus, AiOutlineLine, AiOutlineLeft } from 'react-icons/ai'
 
 export default function Product({
   searchParams,
@@ -20,8 +21,8 @@ export default function Product({
     handleDecreaseFinalPrice,
   } = useOrderContext()
 
-  const { increaseCart, cartQuantity } = useCart()
-
+  const { increaseCart } = useCart()
+  const router = useRouter()
   const [selectedProduct, setSelectedProduct] = useState<number>(1)
   const [observation, setObservation] = useState<string>('')
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
@@ -46,8 +47,6 @@ export default function Product({
   useEffect(() => {
     const totalAdditionals = calculateTotalAdditionals() as any
     const totalProducts = calculateTotalProduct()
-    setCookie('additional', JSON.stringify(additionalsInfo), 7)
-    setCookie('select_product_quantity', selectedProduct, 7)
     setTotalPrice(totalAdditionals + totalProducts)
   }, [additionalsInfo, selectedProduct])
 
@@ -55,6 +54,13 @@ export default function Product({
     <div className="flex justify-center items-center z-50 ">
       {product && (
         <div className=" h-full w-full flex flex-col p-3">
+          <span
+            className="flex items-center gap-1 p-1 leading-4 text-gray-500 cursor-pointer"
+            onClick={() => router.push('/')}
+          >
+            <AiOutlineLeft size={15} />
+            Voltar
+          </span>
           <h1 className=" text-lg font-bold my-4 text-center">
             {product.name}
           </h1>
