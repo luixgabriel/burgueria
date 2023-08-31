@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useState } from 'react'
 import products from '@/data/products'
-import { json } from 'stream/consumers'
+import setCookie from '@/utils/cookies'
 
 interface IOrderContext {
   totalPrice: number
@@ -10,6 +10,7 @@ interface IOrderContext {
     additionPrice: number,
     additionName: string,
   ) => void
+  handleDecreaseFinalPrice: (additionId: number, additionPrice: number) => void
   additionalsInfo: any
   setAdditionalsInfo: (value: any) => void
 }
@@ -44,12 +45,32 @@ export function OrderProvider({ children }: OrderContextProps) {
     setAdditionalsInfo(updatedAdditionalsInfo)
   }
 
+  const handleDecreaseFinalPrice = (
+    additionId: number,
+    additionPrice: number,
+  ) => {
+    console.log(additionalsInfo)
+    const currentAdditional = additionalsInfo[additionId] || {}
+    const updatedQuantity = Math.max((currentAdditional.quantity || 0) - 1, 0)
+
+    const updatedAdditionalsInfo = {
+      ...additionalsInfo,
+      [additionId]: {
+        price: additionPrice,
+        quantity: updatedQuantity,
+      },
+    }
+
+    setAdditionalsInfo(updatedAdditionalsInfo)
+  }
+
   return (
     <OrderContext.Provider
       value={{
         totalPrice,
         setTotalPrice,
         handleUpdateFinalPrice,
+        handleDecreaseFinalPrice,
         additionalsInfo,
         setAdditionalsInfo,
       }}

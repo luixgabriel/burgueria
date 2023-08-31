@@ -14,3 +14,17 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #004083;
+  
+}
+

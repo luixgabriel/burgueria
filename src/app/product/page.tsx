@@ -1,6 +1,7 @@
 'use client'
 import products from '@/data/products'
 import { useOrderContext } from '@/hooks/useOrder'
+import setCookie from '@/utils/cookies'
 import formattedPrice from '@/utils/formatPrice'
 import { useEffect, useState } from 'react'
 import { AiOutlinePlus, AiOutlineLine } from 'react-icons/ai'
@@ -15,29 +16,12 @@ export default function Product({
     setTotalPrice,
     additionalsInfo,
     handleUpdateFinalPrice,
-    setAdditionalsInfo,
+    handleDecreaseFinalPrice,
   } = useOrderContext()
 
   const [selectedProduct, setSelectedProduct] = useState<number>(1)
+  const [observation, setObservation] = useState<string>('')
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
-
-  const handleDecreaseFinalPrice = (
-    additionId: number,
-    additionPrice: number,
-  ) => {
-    const currentAdditional = additionalsInfo[additionId] || {}
-    const updatedQuantity = Math.max((currentAdditional.quantity || 0) - 1, 0)
-
-    const updatedAdditionalsInfo = {
-      ...additionalsInfo,
-      [additionId]: {
-        price: additionPrice,
-        quantity: updatedQuantity,
-      },
-    }
-
-    setAdditionalsInfo(updatedAdditionalsInfo)
-  }
 
   const calculateTotalAdditionals = () => {
     return Object.values(additionalsInfo).reduce(
@@ -59,6 +43,8 @@ export default function Product({
   useEffect(() => {
     const totalAdditionals = calculateTotalAdditionals() as any
     const totalProducts = calculateTotalProduct()
+    setCookie('additional', JSON.stringify(additionalsInfo), 7)
+    setCookie('select_product_quantity', selectedProduct, 7)
     setTotalPrice(totalAdditionals + totalProducts)
   }, [additionalsInfo, selectedProduct])
 
@@ -69,15 +55,17 @@ export default function Product({
           <h1 className=" text-lg font-bold my-4 text-center">
             {product.name}
           </h1>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 p-2">
             <h4>{product.name}</h4>
             <p>{product.description}</p>
-            <span>{formattedPrice(product.price)}</span>
+            <span className="font-semibold">
+              {formattedPrice(product.price)}
+            </span>
           </div>
-          <div className="flex flex-col w[90%]">
+          <div className="flex flex-col w[90%] mt-2">
             {product.additional && (
               <>
-                <h1 className="font-semibold self-center">Complementos</h1>
+                <h1 className="font-semibold self-center ">Complementos</h1>
                 {product.additional.map((add) => (
                   <div key={add.id} className="flex justify-between m-3">
                     <div>
@@ -106,8 +94,11 @@ export default function Product({
               </>
             )}
             <div className="w[90%]">
-              <h4 className="m-2">Alguma observação?</h4>
-              <textarea className="border border-primary w-full p-2 rounded-md" />
+              <h4 className="m-3">Alguma observação?</h4>
+              <textarea
+                className="border border-primary w-full p-2 rounded-md"
+                onChange={(e) => setObservation(e.target.value)}
+              />
             </div>
 
             <div className="flex justify-between p-2 cursor-pointer">
