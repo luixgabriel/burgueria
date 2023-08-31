@@ -42,7 +42,7 @@ export default function Cart() {
             </div>
             {Object.keys(item.additional as any).length > 0 && (
               <div className="mt-3 space-y-2">
-                <h2 className="text-lg font-medium">Additional:</h2>
+                <h2 className="text-lg font-medium">Adicionais:</h2>
                 {Object.values(item.additional as any).map((add: any) => (
                   <div
                     key={add.id}
