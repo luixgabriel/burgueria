@@ -1,16 +1,14 @@
 'use client'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { IProducts } from '@/types/products'
 import { useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface ShoppingCartContext {
-  openCart: () => void
-  closeCart: () => void
   increaseCart: (product: IProducts) => void
   removeFromCart: (id: number) => void
-  cartQuantity: number
   cartItems: IProducts[]
+  setCartItems: (value: IProducts[]) => void
 }
 
 interface ShoppingCartProviderProps {
@@ -20,29 +18,22 @@ interface ShoppingCartProviderProps {
 export const ShoppingCartContext = createContext({} as ShoppingCartContext)
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-  const router = useRouter()
-  const [cartItems, setCartItems] = useState<IProducts[]>([])
-  const [isOpen, setIsOpen] = useState(false)
   const { value, updateLocalStorage } = useLocalStorage<IProducts[]>(
     'products',
     [],
   )
-
-  const cartQuantity = cartItems.length
-
-  const openCart = () => setIsOpen(true)
-  const closeCart = () => setIsOpen(false)
+  const [cartItems, setCartItems] = useState<IProducts[]>(value)
+  const router = useRouter()
+  useEffect(() => {
+    setCartItems(value)
+  }, [value])
 
   function increaseCart(product: IProducts) {
-    if (value.length === 0) {
-      updateLocalStorage([product])
-    } else {
-      value.push(product)
-      updateLocalStorage(value)
-    }
-
-    // router.push('/')
-    window.location.reload()
+    const newCartItems = [...value, product]
+    // if (newCartItems.length <= 1) window.location.reload()
+    setCartItems(newCartItems)
+    updateLocalStorage(newCartItems)
+    router.push('/')
   }
 
   function removeFromCart(id: number) {
@@ -56,10 +47,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       value={{
         increaseCart,
         removeFromCart,
-        openCart,
-        closeCart,
         cartItems,
-        cartQuantity,
+        setCartItems,
       }}
     >
       {children}
