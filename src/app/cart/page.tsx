@@ -85,7 +85,7 @@ export default function Cart() {
         </span>
         {cartItems.length > 0 && (
           <button
-            className="bg-primary text-white p-2 rounded-lg mt-2 transition-all hover:bg-hover"
+            className="bg-primary text-white p-2 rounded-lg m-2 mb-8 transition-all hover:bg-hover"
             onClick={() => router.push('/order')}
           >
             Finalizar Pedido

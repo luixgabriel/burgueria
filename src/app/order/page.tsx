@@ -1,16 +1,20 @@
 'use client'
+import { OrderData, orderSchema } from '@/types/order-schema'
 import { normalizeCPF, normalizePhoneNumber, normalizeCEP } from '@/utils/masks'
-import { useEffect } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export default function Order() {
+  const [address, setAdress] = useState<any>(null)
   const {
     register,
     handleSubmit,
     setValue,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm<OrderData>({ resolver: zodResolver(orderSchema) })
 
   const phoneValue = watch('phone')
   const cpfValue = watch('cpf')
@@ -22,7 +26,27 @@ export default function Order() {
     setValue('cep', normalizeCEP(cepValue))
   }, [phoneValue, cpfValue, cepValue])
 
-  const onSubmit = (data) => {
+  useEffect(() => {
+    async function FetchCep() {
+      const myHouse = await axios.get('https://viacep.com.br/ws/26275150/json/')
+      console.log(myHouse)
+    }
+
+    FetchCep()
+  }, [])
+
+  async function getAddress() {
+    if (cepValue !== ' ' && cepValue.length === 9) {
+      const cep = cepValue.replace('-', '')
+      const addressInput = await axios.get(
+        `https://viacep.com.br/ws/${cep}/json/`,
+      )
+      console.log(addressInput)
+      setAdress(addressInput)
+    }
+  }
+
+  const onSubmit = (data: OrderData) => {
     console.log(data)
   }
 
@@ -34,20 +58,20 @@ export default function Order() {
         {/* Método de entrega */}
         <div className="mb-4">
           <span className="text-lg mb-2 block">Método de Entrega:</span>
-          <label className="inline-flex items-center mr-4">
+          <label className="inline-flex items-center mr-4 cursor-pointer">
             <input
               {...register('deliveryMethod')}
               type="radio"
-              className="form-radio text-primary"
+              className="form-radio text-primary cursor-pointer"
               value="delivery"
             />
             <span className="ml-2">Delivery</span>
           </label>
-          <label className="inline-flex items-center">
+          <label className="inline-flex items-center cursor-pointer">
             <input
               {...register('deliveryMethod')}
               type="radio"
-              className="form-radio text-primary"
+              className="form-radio text-primary cursor-pointer"
               value="pickup"
             />
             <span className="ml-2">Retirar no Local</span>
@@ -60,20 +84,14 @@ export default function Order() {
           <input
             {...register('name')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite seu nome"
           />
-        </div>
-
-        {/* Cep */}
-        <div className="mb-4">
-          <label className="block text-lg mb-2">Cep:</label>
-          <input
-            {...register('cep')}
-            type="tel"
-            className="form-input w-full px-3 py-2 rounded-md"
-            placeholder="Digite seu CEP"
-          />
+          {errors.name && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* Celular */}
@@ -82,9 +100,31 @@ export default function Order() {
           <input
             {...register('phone')}
             type="tel"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite seu celular"
           />
+          {errors.phone && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
+        </div>
+
+        {/* Cep */}
+        <div className="mb-4">
+          <label className="block text-lg mb-2">Cep:</label>
+          <input
+            {...register('cep')}
+            type="tel"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
+            placeholder="Digite seu CEP"
+            onBlur={getAddress}
+          />
+          {errors.cep && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* Endereço */}
@@ -93,9 +133,15 @@ export default function Order() {
           <input
             {...register('address')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite seu endereço"
+            value={address ? address.data.logradouro : ''}
           />
+          {errors.address && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* Número */}
@@ -104,9 +150,14 @@ export default function Order() {
           <input
             {...register('number')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite o número da residência"
           />
+          {errors.number && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* Complemento */}
@@ -115,7 +166,7 @@ export default function Order() {
           <input
             {...register('complement')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite o complemento (opcional)"
           />
         </div>
@@ -126,9 +177,15 @@ export default function Order() {
           <input
             {...register('district')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite o bairro"
+            value={address ? address.data.bairro : ''}
           />
+          {errors.district && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* Cidade */}
@@ -137,24 +194,32 @@ export default function Order() {
           <input
             {...register('city')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite a cidade"
+            value={address ? address.data.localidade : ''}
           />
+          {errors.city && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* UF */}
         <div className="mb-4">
           <label className="block text-lg mb-2">UF:</label>
-          <select
+          <input
             {...register('uf')}
-            className="form-select w-full px-3 py-2 rounded-md"
-          >
-            <option value="">Selecione o estado</option>
-            <option value="SP">SP</option>
-            <option value="RJ">RJ</option>
-            <option value="MG">MG</option>
-            {/* ... Outros estados aqui ... */}
-          </select>
+            type="text"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
+            placeholder="Digite a UF"
+            value={address ? address.data.uf : ''}
+          />
+          {errors.uf && (
+            <span className="text-red-500 text-sm mt-1">
+              Este campo é obrigatório
+            </span>
+          )}
         </div>
 
         {/* CPF na Nota */}
@@ -163,7 +228,7 @@ export default function Order() {
           <input
             {...register('cpf')}
             type="text"
-            className="form-input w-full px-3 py-2 rounded-md"
+            className="form-input w-full px-3 py-2 rounded-md outline-none focus:outline-primary"
             placeholder="Digite seu CPF"
           />
         </div>
