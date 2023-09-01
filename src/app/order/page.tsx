@@ -2,11 +2,14 @@
 import { OrderData, orderSchema } from '@/types/order-schema'
 import { normalizeCPF, normalizePhoneNumber, normalizeCEP } from '@/utils/masks'
 import axios from 'axios'
+import { AiFillShopping } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useCart } from '@/hooks/useCart'
 
 export default function Order() {
+  const { cartItems } = useCart()
   const [address, setAdress] = useState<any>(null)
   const {
     register,
@@ -26,22 +29,12 @@ export default function Order() {
     setValue('cep', normalizeCEP(cepValue))
   }, [phoneValue, cpfValue, cepValue])
 
-  useEffect(() => {
-    async function FetchCep() {
-      const myHouse = await axios.get('https://viacep.com.br/ws/26275150/json/')
-      console.log(myHouse)
-    }
-
-    FetchCep()
-  }, [])
-
   async function getAddress() {
     if (cepValue !== ' ' && cepValue.length === 9) {
       const cep = cepValue.replace('-', '')
       const addressInput = await axios.get(
         `https://viacep.com.br/ws/${cep}/json/`,
       )
-      console.log(addressInput)
       setAdress(addressInput)
     }
   }
@@ -232,7 +225,23 @@ export default function Order() {
             placeholder="Digite seu CPF"
           />
         </div>
+        <div>
+          <div className="flex flex-col ">
+            <div className="flex items-center gap-1 ">
+              <h1 className="flex items-center p-1 gap-1 font-semibold text-lg ">
+                Pedido <AiFillShopping />
+              </h1>
+            </div>
 
+            <div className="bg-primary w-full h-1 rounded-sm" />
+          </div>
+
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <h3>{item.name}</h3>
+            </div>
+          ))}
+        </div>
         {/* Botão de enviar */}
         <div className="mt-6">
           <button
