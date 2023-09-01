@@ -5,6 +5,7 @@ import { AiFillHeart } from 'react-icons/ai'
 import { Lilita_One } from 'next/font/google'
 import { CartControl } from '@/app/components/cart-control'
 import { useRouter } from 'next/navigation'
+import { FavoriteControl } from '@/app/components/favorite-control'
 
 const lilita = Lilita_One({ subsets: ['latin'], weight: '400' })
 
@@ -21,7 +22,7 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-3 ">
         <span>
-          <AiFillHeart color="#004083" size={25} />
+          <FavoriteControl />
         </span>
         <span>
           <CartControl />

@@ -5,6 +5,7 @@ import BackBtn from '../components/back-btn'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
 import Link from 'next/link'
+import { EmptyCart } from '../components/empty-cart'
 
 export default function Cart() {
   const { cartItems, removeFromCart, calculateTotal } = useCart()
@@ -16,6 +17,7 @@ export default function Cart() {
       </div>
       {cartItems.length <= 0 && (
         <div className="flex flex-col items-center mt-6">
+          <EmptyCart />
           <h1 className="leading-5">
             Acesse o nosso cardápio online e comece a adicionar itens ao seu
             pedido!
@@ -79,7 +81,11 @@ export default function Cart() {
             ? ''
             : `Total: ${formattedPrice(calculateTotal(cartItems))}`}
         </span>
-        <button>{cartItems.length <= 0 ? '' : 'Finalizar Pedido'}</button>
+        {cartItems.length > 0 && (
+          <button className="bg-primary text-white p-2 rounded-lg mt-2 transition-all hover:bg-hover">
+            Finalizar Pedido
+          </button>
+        )}
       </div>
     </section>
   )
