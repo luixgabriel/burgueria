@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 import { IProducts } from '@/types/products'
 import { useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useFavorite } from '@/hooks/useFavorite'
 
 interface ShoppingCartContext {
   increaseCart: (product: IProducts) => void
@@ -23,7 +24,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     'products',
     [],
   )
+  const { setIsOpen } = useFavorite()
   const [cartItems, setCartItems] = useState<IProducts[]>(value)
+
   const router = useRouter()
   useEffect(() => {
     setCartItems(value)
@@ -33,7 +36,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const newCartItems = [...value, product]
     setCartItems(newCartItems)
     updateLocalStorage(newCartItems)
-    // router.push('/')
+    setIsOpen(false)
+    router.push('/cart')
   }
 
   function removeFromCart(productId: number) {

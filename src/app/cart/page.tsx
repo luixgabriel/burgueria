@@ -6,9 +6,11 @@ import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
 import Link from 'next/link'
 import { EmptyCart } from '../components/empty-cart'
+import { useRouter } from 'next/navigation'
 
 export default function Cart() {
   const { cartItems, removeFromCart, calculateTotal } = useCart()
+  const router = useRouter()
   return (
     <section className="h-screen bg-gray-100 p-4">
       <div className="flex p-4 justify-between border-b-2 border-primary">
@@ -82,7 +84,10 @@ export default function Cart() {
             : `Total: ${formattedPrice(calculateTotal(cartItems))}`}
         </span>
         {cartItems.length > 0 && (
-          <button className="bg-primary text-white p-2 rounded-lg mt-2 transition-all hover:bg-hover">
+          <button
+            className="bg-primary text-white p-2 rounded-lg mt-2 transition-all hover:bg-hover"
+            onClick={() => router.push('/order')}
+          >
             Finalizar Pedido
           </button>
         )}
