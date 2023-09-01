@@ -4,10 +4,10 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface IFavoriteProductContext {
   favProducts: IProducts[]
-  setFavProducts: (value: any) => void
   isOpen: boolean
   setIsOpen: (value: boolean) => void
   handleFavoriteProduct: (product: IProducts) => void
+  isProductFavorited(productId: number): boolean
 }
 
 interface FavoriteContextProps {
@@ -28,18 +28,28 @@ export function FavoriteProvider({ children }: FavoriteContextProps) {
   }, [value])
 
   function handleFavoriteProduct(product: IProducts) {
-    const newProduct = { ...product, favorite: true }
+    const newProduct = { ...product, favorite: true, additional: [] }
+    if (isProductFavorited(newProduct.id)) {
+      const products = favProducts.filter((item) => item.id !== newProduct.id)
+      setFavProducts(products)
+      updateLocalStorage(products)
+      return
+    }
     const newFavProducts = [...value, newProduct]
     setFavProducts(newFavProducts)
     updateLocalStorage(newFavProducts)
+  }
+
+  function isProductFavorited(productId: number) {
+    return favProducts.some((item) => item.id === productId)
   }
 
   return (
     <FavoriteProductContext.Provider
       value={{
         favProducts,
-        setFavProducts,
         handleFavoriteProduct,
+        isProductFavorited,
         isOpen,
         setIsOpen,
       }}

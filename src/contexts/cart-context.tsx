@@ -33,7 +33,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const newCartItems = [...value, product]
     setCartItems(newCartItems)
     updateLocalStorage(newCartItems)
-    router.push('/')
+    // router.push('/')
   }
 
   function removeFromCart(productId: number) {

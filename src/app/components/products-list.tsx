@@ -11,7 +11,7 @@ interface ProductsListProps {
 
 const ProductsList = ({ product, arr }: ProductsListProps) => {
   const router = useRouter()
-  const { setFavProducts, handleFavoriteProduct } = useFavorite()
+  const { handleFavoriteProduct, isProductFavorited } = useFavorite()
   const handleNavigate = (id: number) => {
     router.push(`/product?id=${id}`)
   }
@@ -40,12 +40,19 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
               <div className="px-5">
                 <AiFillHeart
                   size={25}
+                  color={isProductFavorited(product.id) ? 'red' : 'black'} // Aqui definimos a cor inicial
                   style={{
                     cursor: 'pointer',
                     transition: 'color 0.1s',
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.color = 'red')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'black')}
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.color = isProductFavorited(
+                      product.id,
+                    )
+                      ? 'red'
+                      : 'black')
+                  }
                   onClick={() => handleFavoriteProduct(product)}
                 />
               </div>

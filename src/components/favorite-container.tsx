@@ -1,13 +1,37 @@
 import { useCart } from '@/hooks/useCart'
 import { useFavorite } from '@/hooks/useFavorite'
 import { IProducts } from '@/types/products'
+import { useEffect, useRef } from 'react'
 
 const FavContainer = () => {
-  const { isOpen, favProducts } = useFavorite()
+  const { isOpen, favProducts, setIsOpen } = useFavorite()
   const { increaseCart } = useCart()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false) // Fechar o container
+      }
+    }
+
+    // Adicionar o ouvinte de evento quando o componente é montado
+    document.addEventListener('mousedown', handleClickOutside)
+
+    // Retirar o ouvinte de evento quando o componente for desmontado
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
   return (
     isOpen && (
-      <div className="absolute top-20 right-8 transition-all">
+      <div
+        ref={containerRef}
+        className="absolute top-20 right-8 transition-all"
+      >
         <div className="w-3 h-3 bg-white border-t-2 border-l-2 border-primary rotate-45 absolute -top-1.5 right-8"></div>
         <div className="w-64 max-h-[450px] overflow-y-auto bg-white border-2 border-primary rounded shadow-lg p-3">
           {favProducts.map((item: IProducts) => (
