@@ -1,3 +1,4 @@
+import { useFavorite } from '@/hooks/useFavorite'
 import { IProducts } from '@/types/products'
 import formattedPrice from '@/utils/formatPrice'
 import { useRouter } from 'next/navigation'
@@ -10,6 +11,7 @@ interface ProductsListProps {
 
 const ProductsList = ({ product, arr }: ProductsListProps) => {
   const router = useRouter()
+  const { setFavProducts, handleFavoriteProduct } = useFavorite()
   const handleNavigate = (id: number) => {
     router.push(`/product?id=${id}`)
   }
@@ -24,9 +26,11 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
             <div
               className="flex items-center justify-between transition-all cursor-pointer border-b-2 hover:bg-secondary"
               key={product.id}
-              onClick={() => handleNavigate(product.id)}
             >
-              <div className="p-3 w-[80%]">
+              <div
+                className="p-3 w-[80%]"
+                onClick={() => handleNavigate(product.id)}
+              >
                 <h4 className="font-semibold">{product.name}</h4>
                 <span className="font-semibold">
                   {formattedPrice(product.price)}
@@ -42,6 +46,7 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.color = 'red')}
                   onMouseOut={(e) => (e.currentTarget.style.color = 'black')}
+                  onClick={() => handleFavoriteProduct(product)}
                 />
               </div>
             </div>

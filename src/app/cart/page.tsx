@@ -18,12 +18,12 @@ export default function Cart() {
       {cartItems.length <= 0 && (
         <div className="flex flex-col items-center mt-6">
           <EmptyCart />
-          <h1 className="leading-5">
+          <h1 className="leading-5 text-center text-lg mt-3">
             Acesse o nosso cardápio online e comece a adicionar itens ao seu
             pedido!
           </h1>
           <Link href="/" className="font-bold text-primary m-2 hover:underline">
-            ACESSAR
+            ACESSAR!
           </Link>
         </div>
       )}
