@@ -2,12 +2,13 @@
 import { OrderData, orderSchema } from '@/types/order-schema'
 import { normalizeCPF, normalizePhoneNumber, normalizeCEP } from '@/utils/masks'
 import axios from 'axios'
-import { AiFillShopping } from 'react-icons/ai'
+import { AiFillShopping, AiFillCreditCard } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
+import PaymentMethod from './components/payment-method'
 
 export default function Order() {
   const { cartItems, calculateTotal } = useCart()
@@ -45,7 +46,7 @@ export default function Order() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto mt-3">
+    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-2xl font-semibold mb-4">Informações do Pedido</h2>
 
@@ -299,14 +300,15 @@ export default function Order() {
                 : formattedPrice(calculateTotal(cartItems))}
             </span>
           </div>
-          {/* <div className="mt-6">
-             <button
-              type="submit"
-              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-            >
-              Enviar
-            </button> 
-          </div> */}
+        </div>
+
+        <div className="bg-gray-200 p-3 rounded-md h-full mt-5">
+          <div className="flex flex-col">
+            <h1 className="flex items-center p-1 gap-1 font-medium text-lg">
+              Método de pagamento <AiFillCreditCard />
+            </h1>
+            <PaymentMethod />
+          </div>
         </div>
       </form>
     </div>
