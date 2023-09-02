@@ -12,6 +12,7 @@ import formattedPrice from '@/utils/formatPrice'
 export default function Order() {
   const { cartItems, calculateTotal } = useCart()
   const [address, setAdress] = useState<any>(null)
+  const [deliveryMethod, setDeliveryMethod] = useState<string>('delivery')
   const {
     register,
     handleSubmit,
@@ -57,6 +58,8 @@ export default function Order() {
               type="radio"
               className="form-radio text-primary cursor-pointer"
               value="delivery"
+              checked={deliveryMethod === 'delivery' && true}
+              onClick={() => setDeliveryMethod('delivery')}
             />
             <span className="ml-2">Delivery</span>
           </label>
@@ -66,9 +69,20 @@ export default function Order() {
               type="radio"
               className="form-radio text-primary cursor-pointer"
               value="pickup"
+              checked={deliveryMethod === 'pickup' && true}
+              onClick={() => setDeliveryMethod('pickup')}
             />
             <span className="ml-2">Retirar no Local</span>
           </label>
+
+          {deliveryMethod === 'pickup' && (
+            <div>
+              <span className="text-xs">
+                Endereço: Av. Abílio Augusto Távora, 1111 - Luz, Nova Iguaçu -
+                RJ, 26255-620
+              </span>{' '}
+            </div>
+          )}
         </div>
 
         {/* Nome */}
@@ -225,8 +239,8 @@ export default function Order() {
             placeholder="Digite seu CPF"
           />
         </div>
-        <div className="bg-gray-200 p-3 rounded-md">
-          <div className="flex flex-col ">
+        <div className="bg-gray-200 p-3 rounded-md h-full">
+          <div className="flex flex-col">
             <div className="flex items-center gap-1 ">
               <h1 className="flex items-center p-1 gap-1 font-medium text-lg ">
                 Pedido <AiFillShopping />
@@ -270,23 +284,29 @@ export default function Order() {
                   )}`}
             </span>
             <span className="font-semibold m-1 text-sm ">
-              Taxa de entrega: {formattedPrice(3)}
+              Taxa de entrega:{' '}
+              {deliveryMethod === 'delivery'
+                ? formattedPrice(3)
+                : formattedPrice(0)}
             </span>
           </div>
           <div className="bg-primary w-full h-[0.6px] rounded-sm" />
           <div className="mt-1">
-            <span className="font-semibold ml-1 text-sm ">
-              Total geral: {formattedPrice(3)}
+            <span className="font-semibold ml-1 text-l ">
+              Total geral:{' '}
+              {deliveryMethod === 'delivery'
+                ? formattedPrice(calculateTotal(cartItems) + 3)
+                : formattedPrice(calculateTotal(cartItems))}
             </span>
           </div>
-          <div className="mt-6">
-            {/* <button
+          {/* <div className="mt-6">
+             <button
               type="submit"
               className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Enviar
-            </button> */}
-          </div>
+            </button> 
+          </div> */}
         </div>
       </form>
     </div>
