@@ -35,7 +35,7 @@ export default function Cart() {
             <div className="flex justify-between items-start">
               <div className="w-full">
                 <div className="flex items-center justify-between w-full mb-3">
-                  <h1 className="text-xl font-semibold mb-2">{item.name}</h1>
+                  <h1 className="text-xl font-semibold mb-1">{item.name}</h1>
                   <button>
                     <AiFillDelete
                       size={20}
@@ -59,7 +59,7 @@ export default function Cart() {
               </div>
             </div>
             {Object.keys(item.additional as any).length > 0 && (
-              <div className="mt-3 space-y-2">
+              <div className="mt-2 space-y-2">
                 <h2 className="text-lg font-medium">Adicionais:</h2>
                 {Object.values(item.additional as any).map((add: any) => (
                   <div

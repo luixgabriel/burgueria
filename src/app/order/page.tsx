@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '@/hooks/useCart'
+import formattedPrice from '@/utils/formatPrice'
 
 export default function Order() {
-  const { cartItems } = useCart()
+  const { cartItems, calculateTotal } = useCart()
   const [address, setAdress] = useState<any>(null)
   const {
     register,
@@ -18,7 +19,6 @@ export default function Order() {
     watch,
     formState: { errors },
   } = useForm<OrderData>({ resolver: zodResolver(orderSchema) })
-
   const phoneValue = watch('phone')
   const cpfValue = watch('cpf')
   const cepValue = watch('cep')
@@ -44,7 +44,7 @@ export default function Order() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto mt-10">
+    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto mt-3">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-2xl font-semibold mb-4">Informações do Pedido</h2>
 
@@ -225,31 +225,68 @@ export default function Order() {
             placeholder="Digite seu CPF"
           />
         </div>
-        <div>
+        <div className="bg-gray-200 p-3 rounded-md">
           <div className="flex flex-col ">
             <div className="flex items-center gap-1 ">
-              <h1 className="flex items-center p-1 gap-1 font-semibold text-lg ">
+              <h1 className="flex items-center p-1 gap-1 font-medium text-lg ">
                 Pedido <AiFillShopping />
               </h1>
             </div>
-
-            <div className="bg-primary w-full h-1 rounded-sm" />
+            <div className="bg-primary w-full h-[0.6px] rounded-sm" />
           </div>
-
           {cartItems.map((item) => (
-            <div key={item.id}>
-              <h3>{item.name}</h3>
+            <div key={item.id} className="m-2 ">
+              <h3 className="font-semibold">{item.name}</h3>
+              {Object.keys(item.additional as any).length > 0 && (
+                <div>
+                  {Object.values(item.additional as any).map((add: any) => (
+                    <div
+                      key={add.id}
+                      className="flex justify-between text-gray-600"
+                    >
+                      <p className="text-sm">
+                        {add.quantity}x ADICIONAL ({add.name})
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div>
+                <p>
+                  {item.quantity} un x{' '}
+                  {formattedPrice(item.price / item.quantity)} ={' '}
+                  {formattedPrice(item.price)}
+                </p>{' '}
+              </div>
             </div>
           ))}
-        </div>
-        {/* Botão de enviar */}
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            Enviar
-          </button>
+          <div className="bg-primary w-full h-[0.6px] rounded-sm" />
+          <div className="my-1 flex flex-col">
+            <span className="font-semibold m-1 text-sm ">
+              {cartItems.length <= 0
+                ? ''
+                : `Total do pedido: ${formattedPrice(
+                    calculateTotal(cartItems),
+                  )}`}
+            </span>
+            <span className="font-semibold m-1 text-sm ">
+              Taxa de entrega: {formattedPrice(3)}
+            </span>
+          </div>
+          <div className="bg-primary w-full h-[0.6px] rounded-sm" />
+          <div className="mt-1">
+            <span className="font-semibold ml-1 text-sm ">
+              Total geral: {formattedPrice(3)}
+            </span>
+          </div>
+          <div className="mt-6">
+            {/* <button
+              type="submit"
+              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            >
+              Enviar
+            </button> */}
+          </div>
         </div>
       </form>
     </div>
