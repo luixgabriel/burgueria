@@ -11,7 +11,8 @@ export const orderSchema = z.object({
   district: z.string().nonempty('Campo obrigatório'),
   city: z.string().nonempty('Campo obrigatório'),
   uf: z.string().nonempty('Campo obrigatório'),
-  cpf: z.string().nonempty('Campo obrigatório'),
+  cpf: z.string(),
+  paymentMethod: z.string().nonempty('Campo obrigatório'),
 })
 
 export type OrderData = z.infer<typeof orderSchema>

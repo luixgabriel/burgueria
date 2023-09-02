@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
-import PaymentMethod from './components/payment-method'
 
 export default function Order() {
   const { cartItems, calculateTotal } = useCart()
@@ -26,6 +25,10 @@ export default function Order() {
   const cepValue = watch('cep')
 
   useEffect(() => {
+    setValue('deliveryMethod', deliveryMethod)
+  }, [])
+
+  useEffect(() => {
     setValue('phone', normalizePhoneNumber(phoneValue))
     setValue('cpf', normalizeCPF(cpfValue))
     setValue('cep', normalizeCEP(cepValue))
@@ -34,15 +37,31 @@ export default function Order() {
   async function getAddress() {
     if (cepValue !== ' ' && cepValue.length === 9) {
       const cep = cepValue.replace('-', '')
-      const addressInput = await axios.get(
-        `https://viacep.com.br/ws/${cep}/json/`,
-      )
-      setAdress(addressInput)
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+      const { logradouro, bairro, localidade, uf } = response.data
+      setAdress(response)
+      setValue('address', logradouro)
+      setValue('district', bairro)
+      setValue('city', localidade)
+      setValue('uf', uf)
     }
   }
 
   const onSubmit = (data: OrderData) => {
     console.log(data)
+    console.log(data)
+
+    // 1. Formatar a mensagem
+    const message = `Olá! Gostaria de fazer um pedido.\nNome: ${data.name}\nTelefone: ${data.phone}\nEndereço: ${data.address}`
+
+    // 2. Codificar a mensagem para URL
+    const encodedMessage = encodeURIComponent(message)
+
+    // O número de telefone no formato internacional sem símbolos, ex: 5511999888777 para +55 11 99988-8777.
+    const phoneNumber = 'YOUR_PHONE_NUMBER_HERE'
+
+    // 3. Redirecionar o usuário
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
   }
 
   return (
@@ -256,7 +275,7 @@ export default function Order() {
                 <div>
                   {Object.values(item.additional as any).map((add: any) => (
                     <div
-                      key={add.id}
+                      key={add.name}
                       className="flex justify-between text-gray-600"
                     >
                       <p className="text-sm">
@@ -301,15 +320,65 @@ export default function Order() {
             </span>
           </div>
         </div>
-
+        {/* Método de pagamento */}
         <div className="bg-gray-200 p-3 rounded-md h-full mt-5">
           <div className="flex flex-col">
             <h1 className="flex items-center p-1 gap-1 font-medium text-lg">
               Método de pagamento <AiFillCreditCard />
             </h1>
-            <PaymentMethod />
+            <div className="bg-primary w-full h-[0.6px] rounded-sm" />
+            <div className="flex flex-col">
+              <label className="items-center mr-4 my-1 cursor-pointer">
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  className="form-radio text-primary cursor-pointer"
+                  value="delivery"
+                />
+                <span className="ml-2">Dinheiro</span>
+              </label>
+              <label className="items-center mr-4 my-1 cursor-pointer">
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  className="form-radio text-primary cursor-pointer"
+                  value="delivery"
+                />
+                <span className="ml-2">Cartão de crédito</span>
+              </label>
+              <label className="items-center mr-4 my-1 cursor-pointer">
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  className="form-radio text-primary cursor-pointer"
+                  value="delivery"
+                />
+                <span className="ml-2">Cartão de débito</span>
+              </label>
+              <label className="items-center mr-4 my-1 cursor-pointer">
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  className="form-radio text-primary cursor-pointer"
+                  value="delivery"
+                />
+                <span className="ml-2">Pix</span>
+              </label>
+            </div>
+
+            <div>
+              <p className="text-sm p-2 font-semibold">
+                Pagamento feito na entrega!
+              </p>
+            </div>
           </div>
         </div>
+        <button
+          type="submit"
+          className="bg-primary w-full text-white rounded-lg py-1 transition-all hover:bg-hover"
+        >
+          Finalizar pedido
+        </button>
       </form>
     </div>
   )

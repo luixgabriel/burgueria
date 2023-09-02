@@ -63,7 +63,7 @@ export default function Cart() {
                 <h2 className="text-lg font-medium">Adicionais:</h2>
                 {Object.values(item.additional as any).map((add: any) => (
                   <div
-                    key={add.id}
+                    key={add.name}
                     className="flex justify-between text-gray-600"
                   >
                     <span>{add.name}</span>
