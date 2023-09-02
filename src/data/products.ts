@@ -8,6 +8,7 @@ const products: IProducts[] = [
     price: 10.0,
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de carne, alface, tomate e molho especial.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -24,6 +25,7 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer de carne, bacon crocante, queijo cheddar, alface e molho barbecue.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -40,6 +42,7 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer vegetariano, alface, tomate, cebola roxa e molho tártaro.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -55,6 +58,7 @@ const products: IProducts[] = [
     price: 13.0,
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de frango empanado, alface, maionese e picles.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -71,6 +75,7 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Hambúrguer de picanha, queijo muçarela, bacon, cebolas caramelizadas e molho de mostarda e mel.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -86,6 +91,7 @@ const products: IProducts[] = [
     price: 14.0,
     category: FoodsType.hamburguer,
     description: 'Hambúrguer de peixe, alface, tomate e molho tártaro.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -102,6 +108,7 @@ const products: IProducts[] = [
     category: FoodsType.hamburguer,
     description:
       'Três hambúrgueres de carne, queijo cheddar, bacon, alface, tomate e molho especial.',
+    quantity: 1,
     additional: [
       { id: 1, name: 'Cheedar Cremoso', price: 4.0, quantity: 0 },
       { id: 2, name: 'Blend Bovino 100G', price: 4.0, quantity: 0 },
@@ -117,6 +124,7 @@ const products: IProducts[] = [
     price: 5.0,
     category: FoodsType.fries,
     description: 'Porção de batatas fritas crocantes e salgadas.',
+    quantity: 1,
   },
   {
     id: 9,
@@ -125,6 +133,7 @@ const products: IProducts[] = [
     category: FoodsType.fries,
     description:
       'Batatas fritas cobertas com queijo derretido e pedaços de bacon crocante.',
+    quantity: 1,
   },
   {
     id: 10,
@@ -132,6 +141,7 @@ const products: IProducts[] = [
     price: 6.0,
     category: FoodsType.fries,
     description: 'Batatas fritas com um mix de especiarias e ervas.',
+    quantity: 1,
   },
   {
     id: 11,
@@ -139,6 +149,7 @@ const products: IProducts[] = [
     price: 6.5,
     category: FoodsType.fries,
     description: 'Batatas fritas cobertas com molho de cheddar cremoso.',
+    quantity: 1,
   },
   {
     id: 12,
@@ -146,6 +157,7 @@ const products: IProducts[] = [
     price: 6.5,
     category: FoodsType.fries,
     description: 'Porção de batatas doces fritas, levemente salgadas.',
+    quantity: 1,
   },
   {
     id: 13,
@@ -153,6 +165,7 @@ const products: IProducts[] = [
     category: FoodsType.soda,
     price: 3.5,
     description: 'Refrigerante clássico de cola.',
+    quantity: 1,
   },
   {
     id: 14,
@@ -160,6 +173,7 @@ const products: IProducts[] = [
     price: 3.5,
     category: FoodsType.soda,
     description: 'Refrigerante tradicional de guaraná.',
+    quantity: 1,
   },
   {
     id: 15,
@@ -167,6 +181,7 @@ const products: IProducts[] = [
     price: 3.4,
     category: FoodsType.soda,
     description: 'Refrigerante sabor laranja.',
+    quantity: 1,
   },
   {
     id: 16,
@@ -174,6 +189,7 @@ const products: IProducts[] = [
     price: 3.4,
     category: FoodsType.soda,
     description: 'Refrigerante de guaraná refrescante.',
+    quantity: 1,
   },
   {
     id: 17,
@@ -181,6 +197,7 @@ const products: IProducts[] = [
     price: 3.0,
     category: FoodsType.soda,
     description: 'Bebida gaseificada leve saborizada.',
+    quantity: 1,
   },
   {
     id: 18,
@@ -188,6 +205,7 @@ const products: IProducts[] = [
     price: 4.5,
     category: FoodsType.beers,
     description: 'Cerveja pilsen, leve e refrescante.',
+    quantity: 1,
   },
   {
     id: 19,
@@ -195,6 +213,7 @@ const products: IProducts[] = [
     price: 4.5,
     category: FoodsType.beers,
     description: 'Cerveja pilsen tradicional com sabor marcante.',
+    quantity: 1,
   },
   {
     id: 20,
@@ -202,6 +221,7 @@ const products: IProducts[] = [
     price: 4.4,
     category: FoodsType.beers,
     description: 'Cerveja pilsen de sabor suave.',
+    quantity: 1,
   },
   {
     id: 21,
@@ -210,6 +230,7 @@ const products: IProducts[] = [
     category: FoodsType.beers,
     description:
       'Cerveja premium de origem holandesa com sabor característico.',
+    quantity: 1,
   },
   {
     id: 22,
@@ -217,6 +238,7 @@ const products: IProducts[] = [
     price: 6.7,
     category: FoodsType.beers,
     description: 'Cerveja belga premium, leve e sofisticada.',
+    quantity: 1,
   },
   {
     id: 23,
@@ -224,6 +246,7 @@ const products: IProducts[] = [
     price: 5.0,
     category: FoodsType.beers,
     description: 'Cerveja pilsen brasileira com sabor encorpado e tradição.',
+    quantity: 1,
   },
   {
     id: 24,
@@ -231,6 +254,7 @@ const products: IProducts[] = [
     price: 10.0,
     category: FoodsType.portions,
     description: 'Porção de nuggets crocantes, servidos com molho à escolha.',
+    quantity: 1,
   },
   {
     id: 25,
@@ -239,6 +263,7 @@ const products: IProducts[] = [
     category: FoodsType.portions,
     description:
       'Porção de calabresa fatiada e frita, acompanhada de cebolas douradas.',
+    quantity: 1,
   },
   {
     id: 26,
@@ -246,6 +271,7 @@ const products: IProducts[] = [
     price: 9.0,
     category: FoodsType.portions,
     description: 'Mandioca cortada em palitos e frita até ficar dourada.',
+    quantity: 1,
   },
   {
     id: 27,
@@ -254,6 +280,7 @@ const products: IProducts[] = [
     category: FoodsType.portions,
     description:
       'Porção de queijo empanado e frito, crocante por fora e derretido por dentro.',
+    quantity: 1,
   },
   {
     id: 28,
@@ -262,6 +289,7 @@ const products: IProducts[] = [
     category: FoodsType.portions,
     description:
       'Tiras de frango empanadas e fritas, servidas com molho à escolha.',
+    quantity: 1,
   },
   {
     id: 29,
@@ -270,6 +298,7 @@ const products: IProducts[] = [
     category: FoodsType.combos,
     description:
       'Hambúrguer clássico, porção média de batatas fritas e refrigerante de 300ml.',
+    quantity: 1,
   },
   {
     id: 30,
@@ -278,6 +307,7 @@ const products: IProducts[] = [
     category: FoodsType.combos,
     description:
       'Hambúrguer vegetariano, porção média de batatas fritas e refrigerante de 300ml.',
+    quantity: 1,
   },
   {
     id: 31,
@@ -286,6 +316,7 @@ const products: IProducts[] = [
     category: FoodsType.combos,
     description:
       'Hambúrguer de frango, porção média de batatas fritas e refrigerante de 300ml.',
+    quantity: 1,
   },
   {
     id: 32,
@@ -294,6 +325,7 @@ const products: IProducts[] = [
     category: FoodsType.combos,
     description:
       'Hambúrguer duplo, porção grande de batatas fritas e refrigerante de 500ml.',
+    quantity: 1,
   },
 ]
 

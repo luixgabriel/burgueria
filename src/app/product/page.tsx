@@ -2,11 +2,11 @@
 import products from '@/data/products'
 import { useCart } from '@/hooks/useCart'
 import { useOrderContext } from '@/hooks/useOrder'
-import setCookie from '@/utils/cookies'
+
 import formattedPrice from '@/utils/formatPrice'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { AiOutlinePlus, AiOutlineLine, AiOutlineLeft } from 'react-icons/ai'
+
+import { AiOutlinePlus, AiOutlineLine } from 'react-icons/ai'
 import BackBtn from '../components/back-btn'
 
 export default function Product({
@@ -23,7 +23,6 @@ export default function Product({
   } = useOrderContext()
 
   const { increaseCart } = useCart()
-  const router = useRouter()
   const [selectedProduct, setSelectedProduct] = useState<number>(1)
   const [observation, setObservation] = useState<string>('')
   const product = products.find((prdt) => prdt.id === Number(searchParams.id))
@@ -125,6 +124,7 @@ export default function Product({
                     ...product,
                     additional: additionalsInfo,
                     price: totalPrice,
+                    quantity: selectedProduct,
                     observation,
                   })
                 }

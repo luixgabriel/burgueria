@@ -45,11 +45,11 @@ export default function Cart() {
                   </button>
                 </div>
 
-                <p className="text-gray-600 mb-2">{item.description}</p>
+                <p className="text-gray-600 mb-1">{item.description}</p>
 
-                <p className="text-gray-700 mb-2">
+                {/* <p className="text-gray-700 mb-2">
                   Preço: {formattedPrice(item.price)}
-                </p>
+                </p> */}
 
                 {item.observation && (
                   <p className="text-gray-400 italic">
@@ -74,6 +74,13 @@ export default function Cart() {
                 ))}
               </div>
             )}
+            <div className="my-1">
+              <p>
+                {item.quantity} un x{' '}
+                {formattedPrice(item.price / item.quantity)} ={' '}
+                {formattedPrice(item.price)}
+              </p>{' '}
+            </div>
           </div>
         ))}
       </div>

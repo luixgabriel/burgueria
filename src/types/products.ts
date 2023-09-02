@@ -16,4 +16,5 @@ export interface IProducts {
   description: string
   observation?: string
   additional?: IAdditional[]
+  quantity: number
 }

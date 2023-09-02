@@ -34,6 +34,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   function increaseCart(product: IProducts) {
     const newCartItems = [...value, product]
+    console.log(cartItems)
     setCartItems(newCartItems)
     updateLocalStorage(newCartItems)
     setIsOpen(false)

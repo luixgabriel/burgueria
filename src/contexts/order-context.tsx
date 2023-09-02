@@ -45,6 +45,26 @@ export function OrderProvider({ children }: OrderContextProps) {
     setAdditionalsInfo(updatedAdditionalsInfo)
   }
 
+  const handleUpdateFinalQuantity = (
+    additionId: number,
+    additionPrice: number,
+    additionName: string,
+  ) => {
+    const currentAdditional = additionalsInfo[additionId] || {}
+
+    const updatedQuantity = (currentAdditional.quantity || 0) + 1
+
+    const updatedAdditionalsInfo = {
+      ...additionalsInfo,
+      [additionId]: {
+        name: additionName,
+        price: additionPrice,
+        quantity: updatedQuantity,
+      },
+    }
+    setAdditionalsInfo(updatedAdditionalsInfo)
+  }
+
   const handleDecreaseFinalPrice = (
     additionId: number,
     additionPrice: number,
