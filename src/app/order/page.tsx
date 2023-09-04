@@ -8,14 +8,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
-import {
-  formatCPF,
-  formatCartItems,
-  formatComplement,
-  formatObservation,
-} from '@/utils/message'
+import { formatCPF, formatCartItems, formatComplement } from '@/utils/message'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { IProducts } from '@/types/products'
 
 export default function Order() {
+  const { updateLocalStorage } = useLocalStorage<IProducts[]>('products', [])
   const { cartItems, calculateTotal } = useCart()
   const [address, setAdress] = useState<any>(null)
   const [deliveryMethod, setDeliveryMethod] = useState<string>('delivery')
@@ -82,6 +80,8 @@ export default function Order() {
     const phoneNumber = '5521990534416'
 
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
+    updateLocalStorage([])
+    window.location.replace('/')
   }
 
   return (
@@ -395,7 +395,7 @@ export default function Order() {
         </div>
         <button
           type="submit"
-          className="bg-primary w-full text-white rounded-lg py-1 transition-all hover:bg-hover"
+          className="bg-primary w-full text-white rounded-lg py-1 transition-all mt-5 hover:bg-hover"
         >
           Finalizar pedido
         </button>

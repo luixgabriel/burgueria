@@ -29,7 +29,7 @@ const FoodItems = () => {
         <Image
           src={fries}
           alt="fries"
-          className="w-[90px] h-[90px"
+          className="w-[90px] h-[90px]"
           onClick={() => handleUpdateFood(FoodsType.fries)}
         />
         <h3>Batatas</h3>
@@ -38,7 +38,7 @@ const FoodItems = () => {
         <Image
           src={soda}
           alt="soda"
-          className="w-[90px] h-[90px"
+          className="w-[90px] h-[90px]"
           onClick={() => handleUpdateFood(FoodsType.soda)}
         />
         <h3>Refrigerantes</h3>
@@ -47,7 +47,7 @@ const FoodItems = () => {
         <Image
           src={beers}
           alt="beers"
-          className="w-[90px] h-[90px"
+          className="w-[90px] h-[90px]"
           onClick={() => handleUpdateFood(FoodsType.beers)}
         />
         <h3>Cervejas</h3>
@@ -56,7 +56,7 @@ const FoodItems = () => {
         <Image
           src={portions}
           alt="portions"
-          className="w-[90px] h-[90px"
+          className="w-[90px]"
           onClick={() => handleUpdateFood(FoodsType.portions)}
         />
         <h3>Porções</h3>
@@ -65,7 +65,7 @@ const FoodItems = () => {
         <Image
           src={combo}
           alt="combos"
-          className="w-[90px] h-[90px"
+          className="w-[90px] h-[90px]"
           onClick={() => handleUpdateFood(FoodsType.combos)}
         />
         <h3>Combos</h3>

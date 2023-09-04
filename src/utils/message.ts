@@ -4,7 +4,10 @@ import formattedPrice from './formatPrice'
 const formatAdditionals = (additional: IAdditional[] | null) => {
   return Object.values(additional as IAdditional[])
     .map(
-      (add) => `• ${add.quantity}x ${add.name} - R$${add.price * add.quantity}`,
+      (add) =>
+        `• ${add.quantity}x ${add.name} - R$${formattedPrice(
+          add.price * add.quantity,
+        )}`,
     )
     .join('\n')
 }
@@ -19,7 +22,7 @@ const formatCartItems = (cartItems: IProducts[]) => {
         formattedItem += formatObservation(item.observation)
       }
       if (item.additional && Object.keys(item.additional).length > 0) {
-        formattedItem += `\n *Adicionais*: ${formatAdditionals(
+        formattedItem += `\n    *Adicionais*: ${formatAdditionals(
           item.additional,
         )}`
       }
@@ -29,15 +32,15 @@ const formatCartItems = (cartItems: IProducts[]) => {
 }
 
 const formatObservation = (data: string | null): string => {
-  return data ? `\n *Observações*: ${data}` : ''
+  return data ? `\n    *Observações*: ${data}` : ''
 }
 
 const formatCPF = (data: string | null): string => {
-  return data ? ` *\n CPF na Nota*: ${data}` : ''
+  return data ? `\n    *CPF na Nota*: ${data}` : ''
 }
 
 const formatComplement = (data: string | null): string => {
-  return data ? ` *Complemento*: ${data}` : ''
+  return data ? `\n    *Complemento*: ${data}` : ''
 }
 
 export {
