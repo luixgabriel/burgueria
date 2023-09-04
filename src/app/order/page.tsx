@@ -61,6 +61,7 @@ export default function Order() {
     ${data.address} 
     Cep: ${data.cep}
     Cidade: ${data.city}
+    Número da casa: ${data.number}
     ${formatComplement(data.complement as string)}
     
     *Método de Entrega*:
@@ -78,7 +79,7 @@ export default function Order() {
 
     const encodedMessage = encodeURIComponent(message)
 
-    const phoneNumber = '21990534416'
+    const phoneNumber = '5521990534416'
 
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
   }
