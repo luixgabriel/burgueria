@@ -28,7 +28,9 @@ export function FavoriteProvider({ children }: FavoriteContextProps) {
   }, [value])
 
   function handleFavoriteProduct(product: IProducts) {
+    console.log(product)
     const newProduct = { ...product, favorite: true, additional: [] }
+    console.log(newProduct)
     if (isProductFavorited(newProduct.id)) {
       const products = favProducts.filter((item) => item.id !== newProduct.id)
       setFavProducts(products)

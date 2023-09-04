@@ -40,7 +40,7 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
               <div className="px-5">
                 <AiFillHeart
                   size={25}
-                  color={isProductFavorited(product.id) ? 'red' : 'black'} // Aqui definimos a cor inicial
+                  color={isProductFavorited(product.id) ? 'red' : 'black'}
                   style={{
                     cursor: 'pointer',
                     transition: 'color 0.1s',
@@ -59,7 +59,7 @@ const ProductsList = ({ product, arr }: ProductsListProps) => {
             </div>
           ))
         ) : (
-          <h1>loading</h1>
+          <span>Carregando...</span>
         )}
       </div>
     </div>

@@ -8,6 +8,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCart } from '@/hooks/useCart'
 import formattedPrice from '@/utils/formatPrice'
+import {
+  formatCPF,
+  formatCartItems,
+  formatComplement,
+  formatObservation,
+} from '@/utils/message'
 
 export default function Order() {
   const { cartItems, calculateTotal } = useCart()
@@ -46,21 +52,34 @@ export default function Order() {
       setValue('uf', uf)
     }
   }
-
   const onSubmit = (data: OrderData) => {
-    console.log(data)
-    console.log(data)
+    const message = `*Cliente*:
+    Nome: *${data.name}*
+    Celular: *${data.phone}*${formatCPF(data.cpf)}
 
-    // 1. Formatar a mensagem
-    const message = `Olá! Gostaria de fazer um pedido.\nNome: ${data.name}\nTelefone: ${data.phone}\nEndereço: ${data.address}`
+    *Endereço*:
+    ${data.address} 
+    Cep: ${data.cep}
+    Cidade: ${data.city}
+    ${formatComplement(data.complement as string)}
+    
+    *Método de Entrega*:
+    ${data.deliveryMethod === 'delivery' ? 'Delivery' : 'Retirar no Local'}
+    
+    *Pedido*:
+    ${formatCartItems(cartItems)}
+    
+   *Valor Total*:
+    ${formattedPrice(calculateTotal(cartItems))}
+    
+    *Forma de Pagamento*:
+    ${data.paymentMethod}
+    `
 
-    // 2. Codificar a mensagem para URL
     const encodedMessage = encodeURIComponent(message)
 
-    // O número de telefone no formato internacional sem símbolos, ex: 5511999888777 para +55 11 99988-8777.
-    const phoneNumber = 'YOUR_PHONE_NUMBER_HERE'
+    const phoneNumber = '21990534416'
 
-    // 3. Redirecionar o usuário
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank')
   }
 
@@ -333,7 +352,7 @@ export default function Order() {
                   {...register('paymentMethod')}
                   type="radio"
                   className="form-radio text-primary cursor-pointer"
-                  value="delivery"
+                  value="Dinheiro"
                 />
                 <span className="ml-2">Dinheiro</span>
               </label>
@@ -342,7 +361,7 @@ export default function Order() {
                   {...register('paymentMethod')}
                   type="radio"
                   className="form-radio text-primary cursor-pointer"
-                  value="delivery"
+                  value="Cartão de crédito"
                 />
                 <span className="ml-2">Cartão de crédito</span>
               </label>
@@ -351,7 +370,7 @@ export default function Order() {
                   {...register('paymentMethod')}
                   type="radio"
                   className="form-radio text-primary cursor-pointer"
-                  value="delivery"
+                  value="Cartão de débito"
                 />
                 <span className="ml-2">Cartão de débito</span>
               </label>
@@ -360,7 +379,7 @@ export default function Order() {
                   {...register('paymentMethod')}
                   type="radio"
                   className="form-radio text-primary cursor-pointer"
-                  value="delivery"
+                  value="Pix"
                 />
                 <span className="ml-2">Pix</span>
               </label>
