@@ -80,7 +80,7 @@ export default function Product({
                         className="cursor-pointer"
                         color="#004083"
                         onClick={() =>
-                          handleDecreaseFinalPrice(add.id, add.price)
+                          handleDecreaseFinalPrice(add.id, add.price, add.name)
                         }
                       />
                       <span>{additionalsInfo[add.id]?.quantity || 0}</span>

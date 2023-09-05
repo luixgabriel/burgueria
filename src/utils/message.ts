@@ -3,12 +3,7 @@ import formattedPrice from './formatPrice'
 
 const formatAdditionals = (additional: IAdditional[] | null) => {
   return Object.values(additional as IAdditional[])
-    .map(
-      (add) =>
-        `• ${add.quantity}x ${add.name} - R$${formattedPrice(
-          add.price * add.quantity,
-        )}`,
-    )
+    .map((add) => `• ${add.quantity}x ${add.name}`)
     .join('\n')
 }
 

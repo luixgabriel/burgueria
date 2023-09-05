@@ -10,7 +10,11 @@ interface IOrderContext {
     additionPrice: number,
     additionName: string,
   ) => void
-  handleDecreaseFinalPrice: (additionId: number, additionPrice: number) => void
+  handleDecreaseFinalPrice: (
+    additionId: number,
+    additionPrice: number,
+    additionName: string,
+  ) => void
   additionalsInfo: any
   setAdditionalsInfo: (value: any) => void
 }
@@ -68,6 +72,7 @@ export function OrderProvider({ children }: OrderContextProps) {
   const handleDecreaseFinalPrice = (
     additionId: number,
     additionPrice: number,
+    additionName: string,
   ) => {
     console.log(additionalsInfo)
     const currentAdditional = additionalsInfo[additionId] || {}
@@ -76,6 +81,7 @@ export function OrderProvider({ children }: OrderContextProps) {
     const updatedAdditionalsInfo = {
       ...additionalsInfo,
       [additionId]: {
+        name: additionName,
         price: additionPrice,
         quantity: updatedQuantity,
       },
