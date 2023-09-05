@@ -53,7 +53,7 @@ export default function Product({
   return (
     <div className="flex justify-center items-center z-50  ">
       {product && (
-        <div className=" h-full w-full flex flex-col p-3 md:w-[50%]">
+        <div className=" h-full w-full flex flex-col p-3 md:w-[80%]">
           <BackBtn path="/" />
           <h1 className=" text-lg font-bold my-4 text-center">
             {product.name}

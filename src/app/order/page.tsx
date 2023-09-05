@@ -85,7 +85,7 @@ export default function Order() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto">
+    <div className="bg-white p-8 rounded-lg shadow-md w-full mx-auto max-w-lg md:max-w-7xl">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-2xl font-semibold mb-4">Informações do Pedido</h2>
 

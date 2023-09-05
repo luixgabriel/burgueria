@@ -84,7 +84,7 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      <div className="flex  m-3 flex-col">
+      <div className="flex m-2 flex-col">
         <span className="font-semibold p-2 text-lg self-end">
           {cartItems.length <= 0
             ? ''
@@ -92,7 +92,7 @@ export default function Cart() {
         </span>
         {cartItems.length > 0 && (
           <button
-            className="bg-primary text-white p-2 rounded-lg m-2 mb-8 transition-all hover:bg-hover"
+            className="bg-primary text-white p-2 rounded-lg m-2 mb-2 transition-all hover:bg-hover"
             onClick={() => router.push('/order')}
           >
             Finalizar Pedido
