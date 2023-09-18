@@ -1,11 +1,11 @@
 'use client'
 import Image from 'next/image'
-import logo from '../assets/logo.png'
+import logo from '../../../assets/logo.png'
 import { Lilita_One } from 'next/font/google'
 import { CartControl } from '@/app/components/cart-control'
 import { useRouter } from 'next/navigation'
 import { FavoriteControl } from '@/app/components/favorite-control'
-import FavContainer from './favorite-container'
+import FavContainer from '../favorite-container'
 
 const lilita = Lilita_One({ subsets: ['latin'], weight: '400' })
 
